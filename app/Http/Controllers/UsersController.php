@@ -99,14 +99,14 @@ class UsersController extends Controller
     }
 
     public function confirmEmail($token){
-        $user = User::where('activation_token',$token)->firstOrFail();
+        $user = User::where('activation_token', $token)->firstOrFail();
 
         $user->activated = true;
         $user->activation_token = null;
         $user->save();
 
         Auth::login($user);
-        session()->flash('success','恭喜你，激活成功！');
-        return redirect()->route('user.show',[$user]);
+        session()->flash('success', '恭喜你，激活成功！');
+        return redirect()->route('users.show', [$user]);
     }
 }
